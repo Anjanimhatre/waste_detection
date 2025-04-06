@@ -1,0 +1,79 @@
+{% extends 'public_dashboard.html' %}
+{% load static %}
+
+{% block title %}Upload Image{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <h2>Send Image & Location</h2>
+    
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="image">Select Image:</label>
+            <input type="file" name="image" id="image" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="location">Enter Location:</label>
+            <input type="text" name="location" id="location" placeholder="Enter location" required>
+        </div>
+        {% for image in images %}
+        <div class="uploaded-image">
+            <img src="{{ image.image.url }}" alt="Uploaded Image">
+            <p>Location: {{ image.location }}</p>
+        </div>
+    {% endfor %}
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<style>
+    .upload-container {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+    }
+    input[type="file"], input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        background: #064420;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background: #052f1a;
+    }
+    .uploaded-image img {
+        max-width: 300px;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}

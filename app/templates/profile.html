@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Profile</h2>
+
+    <h3>To Be Cleaned</h3>
+    <div class="row">
+        {% for image in to_be_cleaned %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ image.image.url }}" class="card-img-top" alt="Waste Image">
+                <div class="card-body">
+                    <p>Location: {{ image.location }}</p>
+                    <a href="{% url 'delete_image' image.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3>Cleaned</h3>
+    <div class="row">
+        {% for image in cleaned_images %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ image.image.url }}" class="card-img-top" alt="Cleaned Image">
+                <div class="card-body">
+                    <p>Location: {{ image.location }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

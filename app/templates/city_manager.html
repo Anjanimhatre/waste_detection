@@ -1,0 +1,15 @@
+{% extends "public_dashboard.html" %}
+{% block content %}
+<h2>City Manager Dashboard</h2>
+<div class="image-grid">
+    {% for image in images %}
+    <div class="image-card">
+        <a href="{% url 'image_detail' image.id %}">
+            <img src="{{ image.image.url }}" alt="Uploaded Garbage">
+        </a>
+    </div>
+    {% empty %}
+    <p>No images uploaded by users yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
